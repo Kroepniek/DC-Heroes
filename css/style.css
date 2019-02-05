@@ -61,36 +61,23 @@ header img
     font-size: 18px;
     font-weight: normal;
     display: block;
-    margin-bottom: 20px;
+    margin: 0px 0px 20px 40px;
 }
 
-.team span:first-child
+.team span:nth-of-type(1)
 {
     font-size: 24px;
     font-weight: bold;
-    display: block;
-    margin-bottom: 20px;
+    display: inline-block;
+    margin: 0px 0px 20px 0px;
     transition-duration: 300ms;
 }
 
-@keyframes pulsing-text
+.selector
 {
-    0% { color: #000; }
-    50% { color: #0359FF; }
-    100% { color: #000; }
-}
-
-.team span:first-child:hover
-{
-    animation-name: pulsing-text;
-    animation-duration: 1000ms;
-    animation-iteration-count: infinite;
-    cursor: pointer;
-}
-
-.team:hover
-{
-    height: 160px;
+    font-size: 22px;
+    transition-duration: 300ms;
+    color: black;
 }
 
 #heroes

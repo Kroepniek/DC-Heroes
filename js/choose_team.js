@@ -5,8 +5,15 @@ var teams = [
     document.getElementsByClassName('team')[2], document.getElementsByClassName('team')[3] 
 ];
 
-function ChangeTeam(teamID)
+function ChangeTeam(team)
 {
+    teams.forEach(otherTeam => {
+        otherTeam.style.height = "30px";
+        otherTeam.children[0].style.color = "black";
+    });
+    team.style.height = "160px";
+    team.children[0].style.color = "#0282F9";
+    var teamID = team.getAttribute("teamID");
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -26,7 +33,7 @@ function ChangeTeam(teamID)
 }
 
 teams.forEach(team => {
-    team.addEventListener("click", function(){ChangeTeam(team.getAttribute("teamID"))});
+    team.addEventListener("click", function(){ChangeTeam(team)});
 });
 
 ChangeTeam(1);
