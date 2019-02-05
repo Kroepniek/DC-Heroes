@@ -1,0 +1,117 @@
+body
+{
+    background-color: #fff;
+    margin: 0px;
+    font-family: "Trebuchet MS";
+}
+
+header
+{
+    border-top: solid 14px #0359FF;
+    background-color: #0282F9;
+    width: 100% - 130px;
+    height: 145px;
+    font-size: 50px;
+    font-weight: bold;
+    color: #fff;
+    line-height: 140px;
+    padding-left: 130px;
+}
+
+header img
+{
+    position: absolute;
+    top: 34px;
+    left: 20px;
+}
+
+#container
+{
+    width: 100%;
+    height: 790px;
+}
+
+#teams
+{
+    background-color: inherit;
+    width: 25%;
+    height: 770px;
+    float: left;
+    padding: 20px 0px 0px 20px;
+    font-size: 36px;
+    font-weight: bolder;
+    color: #0282F9;
+}
+
+.team
+{
+    display: block;
+    height: 30px;
+    width: 90%;
+    font-size: 18px;
+    font-weight: normal;
+    color: #000;
+    padding: 5px;
+    overflow: hidden;
+    transition-duration: 300ms;
+}
+
+.show-team-button
+{
+    position: relative;
+    top: -10px;
+    left: 80%;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    line-height: 20px;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+}
+
+.team span
+{
+    font-size: 18px;
+    font-weight: normal;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.team span:first-child
+{
+    font-size: 24px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.team:hover
+{
+    height: 160px;
+}
+
+#heroes
+{
+    background-color: inherit;
+    width: 30%;
+    height: 790px;
+    float: left;
+}
+
+#rating
+{
+    background-color: inherit;
+    width: 40% - 4px;
+    height: 790px;
+    float: left;
+}
+
+.line
+{
+    height: 760px;
+    width: 2px;
+    margin-top: 15px;
+    background-color: #CECECE;
+    float: left;
+}
