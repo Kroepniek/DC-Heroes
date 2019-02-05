@@ -56,20 +56,6 @@ header img
     transition-duration: 300ms;
 }
 
-.show-team-button
-{
-    position: relative;
-    top: -10px;
-    left: 80%;
-    color: #fff;
-    font-size: 18px;
-    text-align: center;
-    line-height: 20px;
-    width: 20px;
-    height: 20px;
-    background-color: red;
-}
-
 .team span
 {
     font-size: 18px;
@@ -84,6 +70,22 @@ header img
     font-weight: bold;
     display: block;
     margin-bottom: 20px;
+    transition-duration: 300ms;
+}
+
+@keyframes pulsing-text
+{
+    0% { color: #000; }
+    50% { color: #0359FF; }
+    100% { color: #000; }
+}
+
+.team span:first-child:hover
+{
+    animation-name: pulsing-text;
+    animation-duration: 1000ms;
+    animation-iteration-count: infinite;
+    cursor: pointer;
 }
 
 .team:hover
@@ -94,9 +96,71 @@ header img
 #heroes
 {
     background-color: inherit;
+    margin-top: 15px;
     width: 30%;
-    height: 790px;
+    height: 760px;
     float: left;
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.hero
+{
+    margin: 0px 15px 15px 15px;
+    height: 260px;
+    width: 100% - 30px;
+    background-image: url("img/background_0.png");
+    overflow: hidden;
+    transition-duration: 300ms;
+    filter: grayscale(100%);
+}
+
+.hero:nth-child(even)
+{
+    background-image: url("img/background_1.png");
+}
+
+.hero:hover
+{
+    filter: grayscale(0%);
+    cursor: pointer;
+}
+
+.hero:last-child
+{
+    margin: 0px 15px 0px 15px;
+}
+
+.hero div:nth-child(1)
+{
+    margin: 15px;
+    width: 170px;
+    height: 230px;
+    float: left;
+}
+
+.hero div:nth-child(2)
+{
+    width: 300px;
+    height: 260px;
+    float: left;
+    overflow: hidden;
+}
+
+.hero span
+{
+    padding: 20px 0px 0px 10px;
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.hero span:nth-child(1)
+{
+    padding: 15px 0px 0px 10px;
+    font-size: 26px;
+    font-weight: bolder;
 }
 
 #rating

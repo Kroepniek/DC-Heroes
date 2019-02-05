@@ -26,33 +26,35 @@
 	<div id="container">
         <div id="teams">
             <p>Teams</p>
-            <p class="team">
-            <span>Justice League</span>
-            <span>Info - 1</span>
-            <span>Info - 2</span>
-            <span>Info - 3</span>
-            <div class="show-team-button">A</div>
+            <p class="team" teamID="1">
+                <span>Justice League</span>
+                <span>Info - 1</span>
+                <span>Info - 2</span>
+                <span>Info - 3</span>
             </p>
-            <p class="team">
-            <span>Flash Family</span>
-            <span>Info - 1</span>
-            <span>Info - 2</span>
-            <span>Info - 3</span>
-            <div class="show-team-button">A</div>
+            <p class="team" teamID="2">
+                <span>Flash Family</span>
+                <span>Info - 1</span>
+                <span>Info - 2</span>
+                <span>Info - 3</span>
             </p>
-            <p class="team">
-            <span>Batman & Robin</span>
-            <span>Info - 1</span>
-            <span>Info - 2</span>
-            <span>Info - 3</span>
-            <div class="show-team-button">A</div>
+            <p class="team" teamID="3">
+                <span>Batman & Robin</span>  
+                <span>Info - 1</span>
+                <span>Info - 2</span>
+                <span>Info - 3</span>
             </p>
-            <p class="team">
-            <span>Teen Titans</span>
-            <span>Info - 1</span>
-            <span>Info - 2</span>
-            <span>Info - 3</span>
-            <div class="show-team-button">A</div>
+            <p class="team" teamID="4">
+                <span>Teen Titans</span>
+                <span>Info - 1</span>
+                <span>Info - 2</span>
+                <span>Info - 3</span>
+            </p>
+            <p class="team" teamID="5">
+                <span>Superman Family</span>
+                <span>Info - 1</span>
+                <span>Info - 2</span>
+                <span>Info - 3</span>
             </p>
         </div>
         <div class="line"></div>
@@ -61,6 +63,7 @@
         <div class="line"></div>
         <div id="rating">
         </div>
-	</div>
+    </div>
+    <script src="js/choose_team.js"></script>
 </body>
 </html>
