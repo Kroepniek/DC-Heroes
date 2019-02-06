@@ -97,7 +97,7 @@ header img
     margin: 0px 15px 15px 15px;
     height: 260px;
     width: 100% - 30px;
-    background-image: url("img/background_0.png");
+    background-color: #EFEFEF;
     overflow: hidden;
     transition-duration: 300ms;
     filter: grayscale(100%);
@@ -105,7 +105,7 @@ header img
 
 .hero:nth-child(even)
 {
-    background-image: url("img/background_1.png");
+    background-color: #DEDEDE;
 }
 
 .hero:hover
@@ -152,9 +152,10 @@ header img
 
 #rating
 {
+    margin-top: 15px;
     background-color: inherit;
     width: 40% - 4px;
-    height: 790px;
+    height: 760px;
     float: left;
 }
 
@@ -165,4 +166,76 @@ header img
     margin-top: 15px;
     background-color: #CECECE;
     float: left;
+}
+
+.show-hero
+{
+    margin: 0px 15px 15px 18px;
+    height: 760px;
+    width: 800px;
+    background-color: #EFEFEF;
+    overflow: hidden;
+    transition-duration: 300ms;
+}
+
+.show-hero div:nth-child(1)
+{
+    margin: 15px 15px 0px 15px;
+    padding-top: 30px;
+    width: 770px;
+    height: 230px;
+    overflow: hidden;
+}
+
+.show-hero div:nth-child(1) img
+{
+    margin: 10px 265px;
+    border-radius: 50%;
+    box-shadow: #000 0 0 100px -10px;
+}
+
+.show-hero div:nth-child(2)
+{
+    margin: 0px 200px 15px 200px;
+    width: 400px;
+    height: 60px;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: #000 0 0 100px -10px;
+    text-align: center;
+    line-height: 60px;
+    letter-spacing: 6px;
+}
+
+.rate-star
+{
+    color: rgb(255, 230, 0);
+    font-size: 46px;
+}
+
+.show-hero div:nth-child(3)
+{
+    margin: 0px 150px 15px 150px;
+    width: 500px;
+    height: 260px;
+    overflow: hidden;
+}
+
+.show-hero span
+{
+    padding-left: 10px;
+    display: block;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+.show-hero span:nth-child(1)
+{
+    margin-top: 10px;
+    padding-left: 10px;
+    font-size: 44px;
+    font-weight: bolder;
+    text-align: center;
 }
