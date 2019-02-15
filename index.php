@@ -84,5 +84,6 @@
         </div>
     </div>
     <script src="js/choose_team.js"></script>
+    <script src="js/rating.js"></script>
 </body>
 </html>

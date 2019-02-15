@@ -56,11 +56,11 @@
                 <div class="show-hero">
                     <div><img src="img/heroes/'.$row["heroImage"].'" height="250" width="250" /></div>
                     <div>
-                        <i class="icon-'.($row["rating"] > 0 ? ($row["rating"] > 1 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star"></i>
-                        <i class="icon-'.($row["rating"] > 2 ? ($row["rating"] > 3 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star"></i>
-                        <i class="icon-'.($row["rating"] > 4 ? ($row["rating"] > 5 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star"></i>
-                        <i class="icon-'.($row["rating"] > 6 ? ($row["rating"] > 7 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star"></i>
-                        <i class="icon-'.($row["rating"] > 8 ? ($row["rating"] > 9 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star"></i>
+                        <i class="icon-'.($row["rating"] > 0 ? ($row["rating"] > 1 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star" onmousemove="RateHover(0, 1, 2)"></i>
+                        <i class="icon-'.($row["rating"] > 2 ? ($row["rating"] > 3 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star" onmousemove="RateHover(1, 3, 4)"></i>
+                        <i class="icon-'.($row["rating"] > 4 ? ($row["rating"] > 5 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star" onmousemove="RateHover(2, 5, 6)"></i>
+                        <i class="icon-'.($row["rating"] > 6 ? ($row["rating"] > 7 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star" onmousemove="RateHover(3, 7, 8)"></i>
+                        <i class="icon-'.($row["rating"] > 8 ? ($row["rating"] > 9 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star" onmousemove="RateHover(4, 9, 10)"></i>
                     </div>
                     <div>
                         <span>'.$row["heroName"].'</span>
