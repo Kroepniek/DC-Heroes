@@ -21,8 +21,7 @@
 </head>
 <body>
 	<header>
-        <img src="img/dc_heroes_logo.png" height="100" width="100"/>
-        Heroes
+        <a href="index.php"><img src="img/dc_heroes_logo.png" height="100" width="100"/>Heroes</a>
 	</header>
 	<div id="container">
         <div id="teams">

@@ -41,26 +41,32 @@
             $sql = "SELECT * FROM hero NATURAL JOIN rating WHERE heroId = ".$_POST['id'];
             $result = $con->query($sql);
 
+            
+
             if ($result->num_rows > 0)
             {
+                $row = $result->fetch_assoc();
+
+                //print_r($row);
+
                 $_SESSION['heroId'] = $_POST['id'];
-                $_SESSION['ratingId'] = $row["rating.ratingId"];
+                $_SESSION['ratingId'] = $row["ratingId"];
                 
                 echo '
                 <div class="show-hero">
-                    <div><img src="img/heroes/'.$row["hero.heroImage"].'" height="250" width="250" /></div>
+                    <div><img src="img/heroes/'.$row["heroImage"].'" height="250" width="250" /></div>
                     <div>
-                        <i class="icon-'.$row["rating.rating"] > 0 ? $row["rating.rating"] > 1 ? 'star' : 'star-half-alt' : 'star-empty'.' rate-star"></i>
-                        <i class="icon-'.$row["rating.rating"] > 2 ? $row["rating.rating"] > 3 ? 'star' : 'star-half-alt' : 'star-empty'.' rate-star"></i>
-                        <i class="icon-'.$row["rating.rating"] > 4 ? $row["rating.rating"] > 5 ? 'star' : 'star-half-alt' : 'star-empty'.' rate-star"></i>
-                        <i class="icon-'.$row["rating.rating"] > 6 ? $row["rating.rating"] > 7 ? 'star' : 'star-half-alt' : 'star-empty'.' rate-star"></i>
-                        <i class="icon-'.$row["rating.rating"] > 8 ? $row["rating.rating"] > 9 ? 'star' : 'star-half-alt' : 'star-empty'.' rate-star"></i>
+                        <i class="icon-'.($row["rating"] > 0 ? ($row["rating"] > 1 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star"></i>
+                        <i class="icon-'.($row["rating"] > 2 ? ($row["rating"] > 3 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star"></i>
+                        <i class="icon-'.($row["rating"] > 4 ? ($row["rating"] > 5 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star"></i>
+                        <i class="icon-'.($row["rating"] > 6 ? ($row["rating"] > 7 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star"></i>
+                        <i class="icon-'.($row["rating"] > 8 ? ($row["rating"] > 9 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star"></i>
                     </div>
                     <div>
-                        <span>'.$row["hero.heroName"].'</span>
+                        <span>'.$row["heroName"].'</span>
                         <span>
-                            '.$row["hero.heroDescription"].'<br>
-                            '.$row["hero.heroPower"].'
+                            '.$row["heroDescription"].'<br>
+                            '.$row["heroPower"].'
                         </span>
                     </div>
                 </div>';

@@ -18,6 +18,12 @@ header
     padding-left: 130px;
 }
 
+header a
+{
+    color: #fff;
+    text-decoration: none;
+}
+
 header img
 {
     position: absolute;
@@ -212,6 +218,7 @@ header img
 {
     color: rgb(255, 230, 0);
     font-size: 46px;
+    text-align: center;
 }
 
 .show-hero div:nth-child(3)
