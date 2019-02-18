@@ -38,45 +38,60 @@
         }
         else
         {
-            $sql = "SELECT * FROM hero NATURAL JOIN rating WHERE heroId = ".$_POST['id'];
-            $result = $con->query($sql);
-
-            
-
-            if ($result->num_rows > 0)
+            if (!isset($_POST['rating']))
             {
-                $row = $result->fetch_assoc();
+                $sql = "SELECT * FROM hero NATURAL JOIN rating WHERE heroId = ".$_POST['id'];
+                $result = $con->query($sql);
 
-                //print_r($row);
+                if ($result->num_rows > 0)
+                {
+                    $row = $result->fetch_assoc();
+                    
+                    echo '
+                    <div class="show-hero" heroID="'.$row["heroId"].'">
+                        <div><img src="img/heroes/'.$row["heroImage"].'" height="250" width="250" /></div>
+                        <div onmouseleave="BackToRightRate()">
+                            <i class="icon-'.($row["rating"] > 0 ? ($row["rating"] > 1 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star" onmousemove="RateHover(0, 1, 2, false)" onclick="RateHover(0, 1, 2, true)"></i>
+                            <i class="icon-'.($row["rating"] > 2 ? ($row["rating"] > 3 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star" onmousemove="RateHover(1, 3, 4, false)" onclick="RateHover(1, 3, 4, true)"></i>
+                            <i class="icon-'.($row["rating"] > 4 ? ($row["rating"] > 5 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star" onmousemove="RateHover(2, 5, 6, false)" onclick="RateHover(2, 5, 6, true)"></i>
+                            <i class="icon-'.($row["rating"] > 6 ? ($row["rating"] > 7 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star" onmousemove="RateHover(3, 7, 8, false)" onclick="RateHover(3, 7, 8, true)"></i>
+                            <i class="icon-'.($row["rating"] > 8 ? ($row["rating"] > 9 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star" onmousemove="RateHover(4, 9, 10, false)" onclick="RateHover(4, 9, 10, true)"></i>
+                        </div>
+                        <div>
+                            <span>'.$row["heroName"].'</span>
+                            <span>
+                                '.$row["heroDescription"].'<br><br>
+                                '.$row["heroPower"].'
+                            </span>
+                        </div>
+                        <div>
+                            <p>Write comment:</p>
+                            <textarea id="RateComment"></textarea>
+                            <div id="SubmitComment" onclick="SubmitRate('.$row['teamId'].')">Submit</div>
+                        </div>';
 
-                $_SESSION['heroId'] = $_POST['id'];
-                $_SESSION['ratingId'] = $row["ratingId"];
-                
-                echo '
-                <div class="show-hero">
-                    <div><img src="img/heroes/'.$row["heroImage"].'" height="250" width="250" /></div>
-                    <div>
-                        <i class="icon-'.($row["rating"] > 0 ? ($row["rating"] > 1 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star" onmousemove="RateHover(0, 1, 2)"></i>
-                        <i class="icon-'.($row["rating"] > 2 ? ($row["rating"] > 3 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star" onmousemove="RateHover(1, 3, 4)"></i>
-                        <i class="icon-'.($row["rating"] > 4 ? ($row["rating"] > 5 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star" onmousemove="RateHover(2, 5, 6)"></i>
-                        <i class="icon-'.($row["rating"] > 6 ? ($row["rating"] > 7 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star" onmousemove="RateHover(3, 7, 8)"></i>
-                        <i class="icon-'.($row["rating"] > 8 ? ($row["rating"] > 9 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star" onmousemove="RateHover(4, 9, 10)"></i>
+                    //Make foreach for each review (show comment, date of it etc.)
+
+                    echo '
                     </div>
-                    <div>
-                        <span>'.$row["heroName"].'</span>
-                        <span>
-                            '.$row["heroDescription"].'<br>
-                            '.$row["heroPower"].'
-                        </span>
-                    </div>
-                </div>';
+                    <!--'.$row["rating"].'-->';
+                }
+                else
+                {
+                    echo "error";
+                }
             }
             else
             {
-                echo "error";
+                $sql = "INSERT INTO rating VALUES(NULL, ".intval($_POST['id']).", ".intval($_POST['rating']).", NOW(), \"".$_POST['rateComment']."\")";
+
+                if ($con->query($sql) === TRUE) {
+                    echo "Najsiwo";
+                } else {
+                    echo "error";
+                }
             }
         }
-
         $con->close();
     }
 ?>

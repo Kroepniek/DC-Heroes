@@ -90,6 +90,7 @@ header img
 {
     background-color: inherit;
     margin-top: 15px;
+    margin-right: 16px;
     width: 30%;
     height: 760px;
     float: left;
@@ -102,7 +103,7 @@ header img
 {
     margin: 0px 15px 15px 15px;
     height: 260px;
-    width: 100% - 30px;
+    width: 94%;
     background-color: #EFEFEF;
     overflow: hidden;
     transition-duration: 300ms;
@@ -128,7 +129,7 @@ header img
 .hero div:nth-child(1)
 {
     margin: 15px;
-    width: 170px;
+    width: 140px;
     height: 230px;
     float: left;
 }
@@ -143,16 +144,16 @@ header img
 
 .hero span
 {
-    padding: 20px 0px 0px 10px;
+    padding: 20px 0px 0px 25px;
     display: block;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
 }
 
 .hero span:nth-child(1)
 {
-    padding: 15px 0px 0px 10px;
-    font-size: 26px;
+    padding: 15px 0px 0px 25px;
+    font-size: 24px;
     font-weight: bolder;
 }
 
@@ -160,7 +161,7 @@ header img
 {
     margin-top: 15px;
     background-color: inherit;
-    width: 40% - 4px;
+    width: 705px;
     height: 760px;
     float: left;
 }
@@ -178,9 +179,10 @@ header img
 {
     margin: 0px 15px 15px 18px;
     height: 760px;
-    width: 800px;
+    width: 705px;
     background-color: #EFEFEF;
-    overflow: hidden;
+    overflow-y: scroll;
+    overflow-x: hidden;
     transition-duration: 300ms;
 }
 
@@ -188,21 +190,21 @@ header img
 {
     margin: 15px 15px 0px 15px;
     padding-top: 30px;
-    width: 770px;
+    width: 755px;
     height: 230px;
     overflow: hidden;
 }
 
 .show-hero div:nth-child(1) img
 {
-    margin: 10px 265px;
+    margin: 10px 225px;
     border-radius: 50%;
     box-shadow: #000 0 0 100px -10px;
 }
 
 .show-hero div:nth-child(2)
 {
-    margin: 0px 200px 15px 200px;
+    margin: 0px 200px 15px 150px;
     width: 400px;
     height: 60px;
     border-radius: 5px;
@@ -221,19 +223,61 @@ header img
     text-align: center;
 }
 
+#SubmitComment
+{
+    margin: 5px 0px 0px 10px;
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #fff;
+    color: #000;
+    border-radius: 3px;
+    transition-duration: 300ms;
+}
+
+#SubmitComment:hover
+{
+    background-color: #0282F9;
+    color: #fff;
+    cursor: pointer;
+}
+
 .show-hero div:nth-child(3)
 {
-    margin: 0px 150px 15px 150px;
+    margin: 0px 150px 15px 100px;
     width: 500px;
     height: 260px;
     overflow: hidden;
+}
+
+.show-hero div:nth-child(4)
+{
+    margin: 0px 150px 15px 100px;
+    width: 500px;
+    height: 260px;
+    overflow: hidden;
+}
+
+.show-hero div:nth-child(4) p
+{
+    margin-left: 10px;
+    font-size: 18px;
+}
+
+.show-hero div:nth-child(4) textarea
+{
+    margin-left: 10px;
+    width: 94%;
+    height: 60px;
+    resize: none;
 }
 
 .show-hero span
 {
     padding-left: 10px;
     display: block;
-    font-size: 22px;
+    font-size: 18px;
     font-weight: bold;
     margin-top: 30px;
 }

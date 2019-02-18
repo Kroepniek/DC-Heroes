@@ -1,5 +1,3 @@
-var heroes;
-
 var teams = [
     document.getElementsByClassName('team')[0], document.getElementsByClassName('team')[1],
     document.getElementsByClassName('team')[2], document.getElementsByClassName('team')[3],
@@ -45,6 +43,9 @@ function RateHero(team, heroID)
             }
             else
             {
+                var rating = this.responseText.substr(this.responseText.indexOf('!') + 3);
+                rating = rating.substr(0, (rating.charAt(1) == '-' ? 1 : 2));
+                SetRightRate(rating);
                 document.getElementById('rating').innerHTML = this.responseText;
             }
         }
