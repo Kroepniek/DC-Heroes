@@ -186,7 +186,7 @@ header img
     transition-duration: 300ms;
 }
 
-.show-hero div:nth-child(1)
+.show-hero #show-hero-img
 {
     margin: 15px 15px 0px 15px;
     padding-top: 30px;
@@ -195,14 +195,14 @@ header img
     overflow: hidden;
 }
 
-.show-hero div:nth-child(1) img
+.show-hero #show-hero-img img
 {
     margin: 10px 225px;
     border-radius: 50%;
     box-shadow: #000 0 0 100px -10px;
 }
 
-.show-hero div:nth-child(2)
+.show-hero #show-hero-rate
 {
     margin: 0px 200px 15px 150px;
     width: 400px;
@@ -221,6 +221,19 @@ header img
     color: rgb(255, 230, 0);
     font-size: 46px;
     text-align: center;
+}
+
+.rate-star-comment
+{
+    color: rgb(255, 230, 0);
+    font-size: 22px;
+    text-align: center;
+}
+
+.comment-stars
+{
+    width: min-content;
+    background-color: inherit;
 }
 
 #SubmitComment
@@ -243,7 +256,7 @@ header img
     cursor: pointer;
 }
 
-.show-hero div:nth-child(3)
+.show-hero #show-hero-info
 {
     margin: 0px 150px 15px 100px;
     width: 500px;
@@ -251,26 +264,79 @@ header img
     overflow: hidden;
 }
 
-.show-hero div:nth-child(4)
+.show-hero #show-hero-comment
 {
     margin: 0px 150px 15px 100px;
     width: 500px;
-    height: 260px;
+    height: 180px;
     overflow: hidden;
 }
 
-.show-hero div:nth-child(4) p
+.show-hero #show-hero-comment p
 {
     margin-left: 10px;
     font-size: 18px;
 }
 
-.show-hero div:nth-child(4) textarea
+.show-hero #show-hero-comment textarea
 {
     margin-left: 10px;
     width: 94%;
     height: 60px;
     resize: none;
+}
+
+.show-hero #show-hero-comments
+{
+    margin: 0px 150px 15px 110px;
+    width: 485px;
+    overflow: hidden;
+}
+
+.show-hero #show-hero-comments div
+{
+    background-color: #FFFFFF;
+    padding-left: 15px;
+    width: 94%;
+    height: min-content;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.show-hero #show-hero-comments div:nth-child(even)
+{
+    background-color: #DEDEDE;
+}
+
+.show-hero #show-hero-comments div div
+{
+    font-size: 16px;
+    font-weight: bold;
+    width: 50%;
+    overflow: hidden;
+    height: 24px;
+    float: left;
+}
+
+.show-hero #show-hero-comments div span
+{
+    font-size: 14px;
+    font-weight: normal;
+    text-align: right;
+    width: 200px;
+    overflow: hidden;
+    height: 24px;
+    margin-top: 15px;
+}
+
+.show-hero #show-hero-comments div p:nth-child(3)
+{
+    font-size: 12px;
+    font-style: normal;
+    width: 60%;
+    height: auto;
+    overflow: hidden;
+    padding-bottom: 10px;
 }
 
 .show-hero span

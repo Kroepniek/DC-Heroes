@@ -40,41 +40,81 @@
         {
             if (!isset($_POST['rating']))
             {
-                $sql = "SELECT * FROM hero NATURAL JOIN rating WHERE heroId = ".$_POST['id'];
+                $sql = "SELECT * FROM hero WHERE heroId = ".$_POST['id'];
+                $result = $con->query($sql);
+                $row = $result->fetch_assoc();
+
+                $heroInfo = $row;
+
+                $sql = "SELECT * FROM rating WHERE heroId = ".$_POST['id'];
                 $result = $con->query($sql);
 
-                if ($result->num_rows > 0)
+                $heroRatings = array();
+
+                while($row = $result->fetch_assoc()){
+                    array_push($heroRatings, $row);
+                }
+
+                $averageRating = 0;
+                $ratingCount = 0;
+                
+                foreach ($heroRatings as $oneRate) 
                 {
-                    $row = $result->fetch_assoc();
-                    
+                    $averageRating += $oneRate["rating"];
+                    $ratingCount++;
+                }
+
+                $averageRating = round($averageRating / $ratingCount);
+
+                if ($result->num_rows > 0)
+                {                   
                     echo '
-                    <div class="show-hero" heroID="'.$row["heroId"].'">
-                        <div><img src="img/heroes/'.$row["heroImage"].'" height="250" width="250" /></div>
-                        <div onmouseleave="BackToRightRate()">
-                            <i class="icon-'.($row["rating"] > 0 ? ($row["rating"] > 1 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star" onmousemove="RateHover(0, 1, 2, false)" onclick="RateHover(0, 1, 2, true)"></i>
-                            <i class="icon-'.($row["rating"] > 2 ? ($row["rating"] > 3 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star" onmousemove="RateHover(1, 3, 4, false)" onclick="RateHover(1, 3, 4, true)"></i>
-                            <i class="icon-'.($row["rating"] > 4 ? ($row["rating"] > 5 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star" onmousemove="RateHover(2, 5, 6, false)" onclick="RateHover(2, 5, 6, true)"></i>
-                            <i class="icon-'.($row["rating"] > 6 ? ($row["rating"] > 7 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star" onmousemove="RateHover(3, 7, 8, false)" onclick="RateHover(3, 7, 8, true)"></i>
-                            <i class="icon-'.($row["rating"] > 8 ? ($row["rating"] > 9 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star" onmousemove="RateHover(4, 9, 10, false)" onclick="RateHover(4, 9, 10, true)"></i>
+                    <div class="show-hero" heroID="'.$heroInfo["heroId"].'">
+                        <div id="show-hero-img"><img src="img/heroes/'.$heroInfo["heroImage"].'" height="250" width="250" /></div>
+                        <div id="show-hero-rate" onmouseleave="BackToRightRate()">
+                            <i class="icon-'.($averageRating > 0 ? ($averageRating > 1 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star" onmousemove="RateHover(0, 1, 2, false)" onclick="RateHover(0, 1, 2, true)"></i>
+                            <i class="icon-'.($averageRating > 2 ? ($averageRating > 3 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star" onmousemove="RateHover(1, 3, 4, false)" onclick="RateHover(1, 3, 4, true)"></i>
+                            <i class="icon-'.($averageRating > 4 ? ($averageRating > 5 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star" onmousemove="RateHover(2, 5, 6, false)" onclick="RateHover(2, 5, 6, true)"></i>
+                            <i class="icon-'.($averageRating > 6 ? ($averageRating > 7 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star" onmousemove="RateHover(3, 7, 8, false)" onclick="RateHover(3, 7, 8, true)"></i>
+                            <i class="icon-'.($averageRating > 8 ? ($averageRating > 9 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star" onmousemove="RateHover(4, 9, 10, false)" onclick="RateHover(4, 9, 10, true)"></i>
                         </div>
-                        <div>
-                            <span>'.$row["heroName"].'</span>
+                        <div id="show-hero-info">
+                            <span>'.$heroInfo["heroName"].'</span>
                             <span>
-                                '.$row["heroDescription"].'<br><br>
-                                '.$row["heroPower"].'
+                                '.$heroInfo["heroDescription"].'<br><br>
+                                '.$heroInfo["heroPower"].'
                             </span>
                         </div>
-                        <div>
+                        <div id="show-hero-comment">
                             <p>Write comment:</p>
                             <textarea id="RateComment"></textarea>
-                            <div id="SubmitComment" onclick="SubmitRate('.$row['teamId'].')">Submit</div>
-                        </div>';
+                            <div id="SubmitComment" onclick="SubmitRate('.$heroInfo['teamId'].')">Submit</div>
+                    </div>';
 
-                    //Make foreach for each review (show comment, date of it etc.)
+                    echo '<div id="show-hero-comments">';
+                    foreach ($heroRatings as $comment) 
+                    {
+                        echo '
+                            <div>
+                                <div class="comment-stars">
+                                    <i class="icon-'.($comment["rating"] > 0 ? ($comment["rating"] > 1 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star-comment"></i>
+                                    <i class="icon-'.($comment["rating"] > 2 ? ($comment["rating"] > 3 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star-comment"></i>
+                                    <i class="icon-'.($comment["rating"] > 4 ? ($comment["rating"] > 5 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star-comment"></i>
+                                    <i class="icon-'.($comment["rating"] > 6 ? ($comment["rating"] > 7 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star-comment"></i>
+                                    <i class="icon-'.($comment["rating"] > 8 ? ($comment["rating"] > 9 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star-comment"></i>
+                                </div>
+                                <span>'.$comment["ratingDate"].'</span>
+                                <p>
+                                    '.$comment["ratingReview"].'
+                                </p>
+                            </div>
+                        ';
+                    }
 
                     echo '
                     </div>
-                    <!--'.$row["rating"].'-->';
+                    </div>
+                    <!--'.$averageRating.'-->';
                 }
                 else
                 {
