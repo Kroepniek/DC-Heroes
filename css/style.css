@@ -233,7 +233,8 @@ header img
 .comment-stars
 {
     width: min-content;
-    background-color: inherit;
+    background-color: transparent;
+    margin: 10px 0px 0px 10px;
 }
 
 #SubmitComment
@@ -270,6 +271,7 @@ header img
     width: 500px;
     height: 180px;
     overflow: hidden;
+    transition-duration: 300ms;
 }
 
 .show-hero #show-hero-comment p
@@ -293,19 +295,18 @@ header img
     overflow: hidden;
 }
 
-.show-hero #show-hero-comments div
+.show-hero #show-hero-comments .comments-comment
 {
     background-color: #FFFFFF;
-    padding-left: 15px;
-    width: 94%;
+    width: 98%;
     height: min-content;
     overflow: hidden;
     margin-top: 10px;
 }
 
-.show-hero #show-hero-comments div:nth-child(even)
+.show-hero #show-hero-comments .comments-comment:nth-child(even)
 {
-    background-color: #DEDEDE;
+    background-color: rgb(245, 245, 245);
 }
 
 .show-hero #show-hero-comments div div
@@ -336,7 +337,7 @@ header img
     width: 60%;
     height: auto;
     overflow: hidden;
-    padding-bottom: 10px;
+    padding: 0px 0px 10px 15px;
 }
 
 .show-hero span

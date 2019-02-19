@@ -97,22 +97,29 @@ function SubmitRate(team)
     var heroID = document.getElementsByClassName('show-hero')[0].getAttribute("heroID");
     var rating = rightRate;
     var rateComment = document.getElementById('RateComment').value;
-    alert(rateComment);
 
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            if (this.responseText == "error")
-            {
-                alert("Server error, try later.");            
+    if (rateComment.length > 3)
+    {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                if (this.responseText == "error")
+                {
+                    alert("Server error, try later.");            
+                }
+                else
+                {
+                    RateHero(document.getElementsByClassName('team')[teamID - 1], heroID);
+
+                    document.getElementById('show-hero-comment').style.height = "0px";
+                    setTimeout(function(){
+                        document.getElementById('show-hero-comment').style.display = "none";
+                    }, 300);
+                }
             }
-            else
-            {
-                alert(this.responseText);
-            }
-        }
-    };
-    xmlhttp.open("POST", "getFromDB.php", true);
-    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.send("team="+teamID+"&id="+heroID+"&rating="+rating+"&rateComment="+rateComment);
+        };
+        xmlhttp.open("POST", "getFromDB.php", true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send("team="+teamID+"&id="+heroID+"&rating="+rating+"&rateComment="+rateComment);
+    }
 }
