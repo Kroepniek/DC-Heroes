@@ -16,7 +16,18 @@ function GetInfo(team)
             }
             else
             {
-                team.innerHTML = this.responseText;
+                if (this.responseText != "error")
+                {
+                    var response = JSON.parse(this.responseText);
+                    team.children[2].innerHTML = '<img src="img/' + response[0] + '" class="team-foto"></img>';
+                    team.children[3].innerHTML = "Amount members: " + response[1];
+                    team.children[4].innerHTML = '<div class="comment-stars">' +
+                    '<i class="icon-'+(response[2] > 0 ? (response[2] > 1 ? 'star' : 'star-half-alt') : 'star-empty')+' rate-star-comment"></i>' +
+                    '<i class="icon-'+(response[2] > 2 ? (response[2] > 3 ? 'star' : 'star-half-alt') : 'star-empty')+' rate-star-comment"></i>' +
+                    '<i class="icon-'+(response[2] > 4 ? (response[2] > 5 ? 'star' : 'star-half-alt') : 'star-empty')+' rate-star-comment"></i>' +
+                    '<i class="icon-'+(response[2] > 6 ? (response[2] > 7 ? 'star' : 'star-half-alt') : 'star-empty')+' rate-star-comment"></i>' +
+                    '<i class="icon-'+(response[2] > 8 ? (response[2] > 9 ? 'star' : 'star-half-alt') : 'star-empty')+' rate-star-comment"></i></div>';
+                }
             }
         }
     };
@@ -25,4 +36,9 @@ function GetInfo(team)
     xmlhttp.send("team="+teamID+"&getInfo=true");
 }
 
-window.onload = GetInfo;
+window.onload = function()
+{
+    teams.forEach(team => {
+        GetInfo(team);
+    });
+}

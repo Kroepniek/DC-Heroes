@@ -357,3 +357,10 @@ header img
     font-weight: bolder;
     text-align: center;
 }
+
+.team-foto
+{
+    height: 30px;
+    width: auto;
+    margin-bottom: -15px;
+}

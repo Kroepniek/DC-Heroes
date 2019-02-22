@@ -68,18 +68,7 @@
         <div class="line"></div>
         <div id="rating">
             <div class="show-hero">
-                <div><img src="img/heroes/batman.jpg" height="250" width="250" /></div>
-                <div>
-                    <i class="icon-star-empty rate-star"></i>
-                    <i class="icon-star-empty rate-star"></i>
-                    <i class="icon-star-empty rate-star"></i>
-                    <i class="icon-star-empty rate-star"></i>
-                    <i class="icon-star-empty rate-star"></i>
-                </div>
-                <div>
-                    <span></span>
-                    <span></span>
-                </div>
+                
             </div>
         </div>
     </div>

@@ -40,21 +40,48 @@
             }
             else
             {
+                $members = 0;
+                $rating = 0;
+                $image = "";
                 //Get info about teams to nav
-                $sql = "SELECT Count(*), rating FROM hero NATURAL JOIN rating WHERE heroId = ".$_POST['team'];
+                $sql = "SELECT COUNT(*) FROM hero NATURAL JOIN team WHERE teamId = ".$_POST['team'];
                 $result = $con->query($sql);
-
+                
                 if ($result->num_rows > 0)
                 {
-                    print_r($row);
-                    while($row = $result->fetch_assoc())
-                    {
-                        
-                    }
+                    $row = $result->fetch_assoc();
+                    $members = $row["COUNT(*)"];
                 }
                 else
                 {
+                    $members = "error";
+                }
+
+                $sql = "SELECT teamDescription, teamImage FROM team WHERE teamId = ".$_POST['team'];
+                $result = $con->query($sql);
+                
+                if ($result->num_rows > 0)
+                {
+                    $row = $result->fetch_assoc();
+                    //$rating = $row["teamDescription"];
+                    $rating = 5;
+                    $image  = $row["teamImage"];
+                }
+                else
+                {
+                    $rating = "error";
+                    $image = "error";
+                }
+
+                if ($members == "error" || $rating == "error" || $image == "error")
+                {
                     echo "error";
+                }
+                else
+                {
+                    $return = array($image, $members, $rating);
+                    //echo $return;
+                    echo json_encode($return);
                 }
             }
         }
