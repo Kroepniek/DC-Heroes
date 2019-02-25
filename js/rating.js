@@ -110,7 +110,7 @@ function SubmitRate(team)
                 else
                 {
                     RateHero(document.getElementsByClassName('team')[teamID - 1], heroID);
-
+                    GetInfo(document.getElementsByClassName('team')[teamID - 1]);
                     document.getElementById('show-hero-comment').style.height = "0px";
                     setTimeout(function(){
                         document.getElementById('show-hero-comment').style.display = "none";
@@ -120,6 +120,6 @@ function SubmitRate(team)
         };
         xmlhttp.open("POST", "getFromDB.php", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xmlhttp.send("team="+teamID+"&id="+heroID+"&rating="+rating+"&rateComment="+rateComment);
+        xmlhttp.send("team="+teamID+"&id="+heroID+"&rating="+rating+"&rateComment="+rateComment+"&q=submitRate");
     }
 }

@@ -28,7 +28,7 @@ function ChangeTeam(team)
     };
     xmlhttp.open("POST", "getFromDB.php", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.send("team="+teamID);
+    xmlhttp.send("team="+teamID+"&q=changeTeam");
 }
 
 function RateHero(team, heroID)
@@ -52,7 +52,7 @@ function RateHero(team, heroID)
     };
     xmlhttp.open("POST", "getFromDB.php", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.send("team="+teamID+"&id="+heroID);
+    xmlhttp.send("team="+teamID+"&id="+heroID+"&q=rateHero");
 }
 
 teams.forEach(team => {

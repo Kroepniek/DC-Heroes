@@ -230,6 +230,20 @@ header img
     text-align: center;
 }
 
+.rate-star-info
+{
+    color: rgb(255, 170, 0);
+    font-size: 28px;
+    text-align: center;
+}
+
+.info-stars
+{
+    width: max-content;
+    background-color: transparent;
+    margin: -5px 0px 0px -10px;
+}
+
 .comment-stars
 {
     width: min-content;
