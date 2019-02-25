@@ -378,3 +378,25 @@ header img
     width: auto;
     margin-bottom: -15px;
 }
+
+.remove-min
+{
+    background-color: #fff;
+    text-align: center;
+    line-height: 20px;
+    padding: 0px;
+    font-size: 10px;
+    position: relative;
+    top: 10px;
+    left: calc(100% - 30px);
+    height: 20px;
+    width: 20px;
+    border-radius: 16px;
+    border: solid 3px #FF3434;
+    transition-duration: 150ms;
+}
+
+.remove-min:hover
+{
+    background-color: #FF3434;
+}

@@ -68,12 +68,10 @@
         <div class="line"></div>
         <div id="rating">
             <div class="show-hero">
-                
             </div>
         </div>
     </div>
     <script src="js/choose_team.js"></script>
     <script src="js/rating.js"></script>
-    <script src="js/teams_info.js"></script>
 </body>
 </html>

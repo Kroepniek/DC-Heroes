@@ -55,6 +55,87 @@ function RateHero(team, heroID)
     xmlhttp.send("team="+teamID+"&id="+heroID+"&q=rateHero");
 }
 
+function GetInfo(team)
+{
+    var teamID = team.getAttribute("teamID");
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            if (this.responseText == "error")
+            {
+                alert("Server error, try later.");            
+            }
+            else
+            {
+                if (this.responseText != "error")
+                {
+                    var response = JSON.parse(this.responseText);
+                    team.children[2].innerHTML = '<img src="img/' + response[0] + '" class="team-foto"></img>';
+                    team.children[3].innerHTML = "Amount members: " + response[1];
+                    team.children[4].innerHTML = '<div class="info-stars">' +
+                    '<i class="icon-'+(response[2] > 0 ? (response[2] > 1 ? 'star' : 'star-half-alt') : 'star-empty')+' rate-star-info"></i>' +
+                    '<i class="icon-'+(response[2] > 2 ? (response[2] > 3 ? 'star' : 'star-half-alt') : 'star-empty')+' rate-star-info"></i>' +
+                    '<i class="icon-'+(response[2] > 4 ? (response[2] > 5 ? 'star' : 'star-half-alt') : 'star-empty')+' rate-star-info"></i>' +
+                    '<i class="icon-'+(response[2] > 6 ? (response[2] > 7 ? 'star' : 'star-half-alt') : 'star-empty')+' rate-star-info"></i>' +
+                    '<i class="icon-'+(response[2] > 8 ? (response[2] > 9 ? 'star' : 'star-half-alt') : 'star-empty')+' rate-star-info"></i></div>';
+                }
+            }
+        }
+    };
+    xmlhttp.open("POST", "getFromDB.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("team="+teamID+"&q=getInfo");
+}
+
+function RemoveHero(teamID, heroID)
+{
+    var team = teams[teamID - 1];
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            if (this.responseText == "error")
+            {
+                alert("Server error, try later.");            
+            }
+            else
+            {
+                ChangeTeam(team);
+            }
+        }
+    };
+    xmlhttp.open("POST", "getFromDB.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("id="+heroID+"&q=removeHero");
+}
+
+function RemoveRate(rateID, teamID, heroID)
+{
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            if (this.responseText == "error")
+            {
+                alert("Server error, try later.");            
+            }
+            else
+            {
+                RateHero(document.getElementsByClassName('team')[teamID - 1], heroID);
+                GetInfo(document.getElementsByClassName('team')[teamID - 1]);
+            }
+        }
+    };
+    xmlhttp.open("POST", "getFromDB.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("id="+heroID+"&rateId="+rateID+"&q=removeHero");
+}
+
+window.onload = function()
+{
+    teams.forEach(team => {
+        GetInfo(team);
+    });
+}
+
 teams.forEach(team => {
     team.addEventListener("click", function(){ChangeTeam(team)});
 });

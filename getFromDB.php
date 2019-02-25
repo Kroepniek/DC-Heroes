@@ -28,6 +28,7 @@
                             <span>'.$row["heroName"].'</span>
                             <span>'.$row["heroDescription"].'</span>
                         </div>
+                        <div class="remove-min" onclick="RemoveHero('.$_POST['team'].', '.$row["heroId"].')">X</div>
                     </div>';
                 }
             }
@@ -165,7 +166,8 @@
                         <span>'.date_format(date_create($comment["ratingDate"]), "d.m.Y | H:i").'</span>
                         <p>
                             '.$comment["ratingReview"].'
-                    </p>
+                        </p>
+                        <div class="remove-min" onclick="RemoveRate('.$comment['ratingId'].', '.$_POST["team"].', '.$_POST["id"].')">X</div>
                     </div>
                 ';
             }
@@ -181,6 +183,30 @@
             if ($con->query($sql) === TRUE) {
                 echo "ok";
             } 
+            else 
+            {
+                echo "error";
+            }
+        }
+        else if ($_POST['q'] == "removeHero")
+        {
+            $sql = "DELETE FROM hero WHERE heroId = ".$_POST['id'];
+
+            if ($con->query($sql) === TRUE) {
+                echo "ok";
+            }
+            else 
+            {
+                echo "error";
+            }
+        }
+        else if ($_POST['q'] == "removeComment")
+        {
+            $sql = "DELETE FROM rating WHERE ratingId = ".$_POST['rateId'];
+
+            if ($con->query($sql) === TRUE) {
+                echo "ok";
+            }
             else 
             {
                 echo "error";
