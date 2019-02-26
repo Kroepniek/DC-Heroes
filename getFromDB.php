@@ -22,15 +22,19 @@
                 while($row = $result->fetch_assoc())
                 {
                     echo '
-                    <div class="hero" onclick="RateHero(this, '.$row["heroId"].')">
+                    <div class="hero" onclick="RateHero('.$_POST['team'].', '.$row["heroId"].')">
                         <div><img src="img/heroes/'.$row["heroImage"].'" height="230" width="170" /></div>
                         <div>
                             <span>'.$row["heroName"].'</span>
                             <span>'.$row["heroDescription"].'</span>
                         </div>
-                        <div class="remove-min" onclick="RemoveHero('.$_POST['team'].', '.$row["heroId"].')">X</div>
+                        <div class="remove-min remove-hero icon-trash-empty" onclick="RemoveHero('.$_POST['team'].', '.$row["heroId"].')"></div>
                     </div>';
                 }
+                echo '
+                    <div class="hero-add" onclick="AddNewHero()">
+                        <p>+</p>
+                    </div>';
             }
             else
             {
@@ -162,12 +166,12 @@
                             <i class="icon-'.($comment["rating"] > 4 ? ($comment["rating"] > 5 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star-comment"></i>
                             <i class="icon-'.($comment["rating"] > 6 ? ($comment["rating"] > 7 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star-comment"></i>
                             <i class="icon-'.($comment["rating"] > 8 ? ($comment["rating"] > 9 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star-comment"></i>
+                            <div class="remove-min remove-rate" onclick="RemoveRate('.$comment["ratingId"].', '.$_POST["team"].', '.$_POST["id"].')"></div>
                         </div>
                         <span>'.date_format(date_create($comment["ratingDate"]), "d.m.Y | H:i").'</span>
                         <p>
                             '.$comment["ratingReview"].'
                         </p>
-                        <div class="remove-min" onclick="RemoveRate('.$comment['ratingId'].', '.$_POST["team"].', '.$_POST["id"].')">X</div>
                     </div>
                 ';
             }
@@ -200,7 +204,7 @@
                 echo "error";
             }
         }
-        else if ($_POST['q'] == "removeComment")
+        else if ($_POST['q'] == "removeRate")
         {
             $sql = "DELETE FROM rating WHERE ratingId = ".$_POST['rateId'];
 

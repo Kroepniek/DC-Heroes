@@ -31,9 +31,8 @@ function ChangeTeam(team)
     xmlhttp.send("team="+teamID+"&q=changeTeam");
 }
 
-function RateHero(team, heroID)
+function RateHero(teamID, heroID)
 {
-    var teamID = team.getAttribute("teamID");
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -119,14 +118,14 @@ function RemoveRate(rateID, teamID, heroID)
             }
             else
             {
-                RateHero(document.getElementsByClassName('team')[teamID - 1], heroID);
+                RateHero(teamID, heroID);
                 GetInfo(document.getElementsByClassName('team')[teamID - 1]);
             }
         }
     };
     xmlhttp.open("POST", "getFromDB.php", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.send("id="+heroID+"&rateId="+rateID+"&q=removeHero");
+    xmlhttp.send("id="+heroID+"&team="+teamID+"&rateId="+rateID+"&q=removeRate");
 }
 
 window.onload = function()
