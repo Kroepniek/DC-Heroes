@@ -32,7 +32,7 @@
                     </div>';
                 }
                 echo '
-                    <div class="hero-add" onclick="AddNewHeroPopup()">
+                    <div class="hero-add" onclick="AddNewHeroPopup('.$_POST['team'].')">
                         <p>+</p>
                     </div>';
             }
@@ -216,8 +216,19 @@
                 echo "error";
             }
         }
+        else if ($_POST['q'] == "addHero")
+        {
+            $sql = "INSERT INTO hero VALUES (NULL, \"".$_POST['heroName']."\", \"".$_POST['heroDesc']."\", \"".$_POST['heroPwrs']."\", \"".$_POST['heroPicName']."\", ".intval($_POST['heroTeam']).")";
+
+            if ($con->query($sql) === TRUE) {
+                echo "ok";
+            }
+            else 
+            {
+                echo "error";
+            }
+        }
+
         $con->close();
     }
 ?>
-
-

@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Czas generowania: 25 Lut 2019, 13:52
+-- Czas generowania: 27 Lut 2019, 20:43
 -- Wersja serwera: 5.7.19
 -- Wersja PHP: 7.1.20
 
@@ -66,7 +66,8 @@ INSERT INTO `hero` (`heroId`, `heroName`, `heroDescription`, `heroPower`, `heroI
 (22, 'Lois Lane', 'Lois Lane is a reporter and Superman\'s Superman\'s chief romantic interest (and in the DC continuity his wife). She is also known as \"superwoman\". She is a journalist for the Metropolis newspaper, The Daily Planet.', 'Aspects of Lois\' personality have varied over the years (depending on the comic writers handling of the character and American social attitudes toward women at the time) but in most incarnations she has been depicted as a determined, strong-willed person.', 'lois-lane.jpg', 5),
 (23, 'Supergirl', 'Supergirl is the superhero name of Kara Zor-El, cousin to Superman. She was created by writer Otto Binder and designed by artist Al Plastino in 1959, and she first appeared in Action Comics, in whose first issue Superman himself was introduced.', 'Supergirl possesses Kryptonian standard abilities. She is incredibly strong, fast and nigh invulnerable, and possesses the capability to fly.', 'supergirl.jpg', 5),
 (24, 'Jonathan Samuel Kent', 'Jonathan Kent is the firstborn son of Kryptonian superhero Superman and news reporter Lois Lane.', 'Jon\'s able to absorb the light and radiation of stars & suns, mainly those of the yellow stellar spectrum.', 'jonathan-samuel-kent.jpg', 5),
-(25, 'Catherine Grant', 'Catherine Grant, most commonly known as \"Cat\", is a reporter for the Daily Planet newspaper.', 'She is the gossip columnist, and is very fond of badmouthing Supergirl in her articles.', 'catherine-grant.jpg', 5);
+(25, 'Catherine Grant', 'Catherine Grant, most commonly known as \"Cat\", is a reporter for the Daily Planet newspaper.', 'She is the gossip columnist, and is very fond of badmouthing Supergirl in her articles.', 'catherine-grant.jpg', 5),
+(28, 'Kroepniek', 'Amazing man, insane skills.', '- Slapen\n- Eten\n- Winnen', 'kon_avatar_teczowy.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -87,13 +88,12 @@ CREATE TABLE `rating` (
 --
 
 INSERT INTO `rating` (`ratingId`, `heroId`, `rating`, `ratingDate`, `ratingReview`) VALUES
-(1, 1, 6, '2019-02-22 12:17:21.00000', 'Zajebisty koleszka.'),
-(2, 1, 6, '2019-02-25 08:48:19.00000', 'gfhj'),
-(3, 1, 1, '2019-02-25 08:48:36.00000', '25252'),
-(4, 1, 4, '2019-02-25 10:10:27.00000', 'dsadsad'),
 (5, 1, 10, '2019-02-25 13:34:07.00000', 'Kocham cie kurwa'),
 (6, 1, 1, '2019-02-25 13:47:29.00000', 'Kuraz'),
-(7, 3, 10, '2019-02-25 13:47:43.00000', 'Dobry koleka');
+(7, 3, 10, '2019-02-25 13:47:43.00000', 'Dobry koleka'),
+(10, 4, 1, '2019-02-26 17:55:32.00000', 'Frajer'),
+(11, 27, 10, '2019-02-27 21:26:08.00000', 'Amazing person.'),
+(12, 28, 10, '2019-02-27 21:41:10.00000', 'Ik zou hem een 10 geven voor dit project. Api was niet gebruikt want api zou niet zo goed werken met nieuwe hero toevoegen dus ik heb alleen gebruikt gemaakt van DB. Als er geen CMS was, zou ik wel een API gebruiken.');
 
 -- --------------------------------------------------------
 
@@ -149,13 +149,13 @@ ALTER TABLE `team`
 -- AUTO_INCREMENT dla tabeli `hero`
 --
 ALTER TABLE `hero`
-  MODIFY `heroId` int(3) NOT NULL AUTO_INCREMENT COMMENT 'the unique heroId used as a parameter in the URL and fetched by PHP using the $_GET superblobal variable', AUTO_INCREMENT=26;
+  MODIFY `heroId` int(3) NOT NULL AUTO_INCREMENT COMMENT 'the unique heroId used as a parameter in the URL and fetched by PHP using the $_GET superblobal variable', AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT dla tabeli `rating`
 --
 ALTER TABLE `rating`
-  MODIFY `ratingId` int(3) NOT NULL AUTO_INCREMENT COMMENT 'unique rating is, auto incremented', AUTO_INCREMENT=8;
+  MODIFY `ratingId` int(3) NOT NULL AUTO_INCREMENT COMMENT 'unique rating is, auto incremented', AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT dla tabeli `team`

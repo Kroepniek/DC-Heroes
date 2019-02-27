@@ -128,7 +128,7 @@ function RemoveRate(rateID, teamID, heroID)
     xmlhttp.send("id="+heroID+"&team="+teamID+"&rateId="+rateID+"&q=removeRate");
 }
 
-function AddNewHeroPopup()
+function AddNewHeroPopup(heroTeam)
 {
     var main = document.getElementById('container');
 
@@ -144,6 +144,13 @@ function AddNewHeroPopup()
 
     alphaBg.appendChild(popupBg);
 
+    //Popup exit
+    var button = document.createElement("div");
+    var icon = document.createTextNode("x");
+    button.appendChild(icon);
+    button.classList = "popup-exit";
+    button.setAttribute("onclick", "RemovePopup()");
+
     //Popup labels, inputs
 
     //Hero Name
@@ -153,10 +160,11 @@ function AddNewHeroPopup()
     var input = document.createElement("input");
     input.type = "text";
     input.name = "hero-name";
-    input.classList = "popup-input";
+    input.id = "popup-input";
     label.appendChild(node);
 
     popupBg.appendChild(label);
+    popupBg.appendChild(button);
     popupBg.appendChild(input);
 
     //Hero Description
@@ -167,6 +175,22 @@ function AddNewHeroPopup()
     input.type = "text";
     input.name = "hero-desc";
     input.classList = "popup-text";
+    input.id = "popup-desc";
+    input.rows = 5;
+    label.appendChild(node);
+    
+    popupBg.appendChild(label);
+    popupBg.appendChild(input);
+
+    //Hero Powers
+    label = document.createElement("p");
+    label.classList = "popup-label";
+    node = document.createTextNode("Set Hero powers:");
+    input = document.createElement("textarea");
+    input.type = "text";
+    input.name = "hero-pwrs";
+    input.classList = "popup-text";
+    input.id = "popup-pwrs";
     input.rows = 5;
     label.appendChild(node);
     
@@ -180,11 +204,103 @@ function AddNewHeroPopup()
     input = document.createElement("input");
     input.type = "file";
     input.name = "hero-picture";
-    input.classList = "popup-picture";
+    input.setAttribute("accept", "image/png, image/jpeg");
+    input.id = "popup-picture";
     label.appendChild(node);
     
     popupBg.appendChild(label);
     popupBg.appendChild(input);
+
+    //Add Button
+    button = document.createElement("div");
+    button.classList = "popup-submit";
+    node = document.createTextNode("Add Hero");
+    button.appendChild(node);
+    button.setAttribute("onclick", "AddNewHero("+heroTeam+")");
+    
+    popupBg.appendChild(button);
+}
+
+function RemovePopup()
+{
+    var main = document.getElementById('container');
+    var alphaBg = document.getElementById('alpha-bg');
+    main.removeChild(alphaBg);
+}
+
+function AddNewHero(heroTeam)
+{
+    var nameFromPopup = document.getElementById('popup-input').value;
+    var descFromPopup = document.getElementById('popup-desc').value;
+    var pwrsFromPopup = document.getElementById('popup-pwrs').value;
+    var imgeFromPopup = document.getElementById('popup-picture');
+
+    if(nameFromPopup.length == 0 || descFromPopup.length == 0 || pwrsFromPopup.length == 0 || imgeFromPopup.files.length == 0)
+    {
+        return;
+    }
+
+    UploadPictureToServer(heroTeam);
+}
+
+function UploadPictureToServer(heroTeam)
+{
+    var nameFromPopup = document.getElementById('popup-input').value;
+    var descFromPopup = document.getElementById('popup-desc').value;
+    var pwrsFromPopup = document.getElementById('popup-pwrs').value;
+    var imgeFromPopup = document.getElementById('popup-picture');
+    
+    var formData = new FormData();
+
+    if (!imgeFromPopup.files[0].type.match('image.*'))
+    {
+        return;
+    }
+
+    formData.append('picture', imgeFromPopup.files[0], imgeFromPopup.files[0].name);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'uploadPic.php', true);
+    xhr.onload = function () 
+    {
+        if (xhr.status === 200)
+        {
+            if (this.responseText == "error")
+            {
+                alert("An error occurred.");
+            }
+            else
+            {
+                RemovePopup();
+                AddHeroInfoToDB(nameFromPopup, descFromPopup, pwrsFromPopup, imgeFromPopup.files[0].name, heroTeam);
+            }
+        }
+        else
+        {
+            alert("An error occurred.");
+        }
+    };
+    xhr.send(formData);
+}
+
+function AddHeroInfoToDB(heroName, heroDesc, heroPwrs, heroPicName, heroTeam)
+{
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            if (this.responseText == "error")
+            {
+                alert("Server error, try later.");            
+            }
+            else
+            {
+                alert("New hero is successfully added.");
+            }
+        }
+    };
+    xmlhttp.open("POST", "getFromDB.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("heroName="+heroName+"&heroDesc="+heroDesc+"&heroPwrs="+heroPwrs+"&heroPicName="+heroPicName+"&heroTeam="+heroTeam+"&q=addHero");
 }
 
 window.onload = function()
