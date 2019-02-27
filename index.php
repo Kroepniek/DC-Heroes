@@ -24,44 +24,56 @@
         <a href="index.php"><img src="img/dc_heroes_logo.png" height="100" width="100"/>Heroes</a>
 	</header>
 	<div id="container">
-        <div id="teams">
+        <nav id="teams">
             <p>Teams</p>
-            <p class="team" teamID="1">
-                <i class="icon-right-open selector"></i>
-                <span>Justice League</span>
-                <span>Info - 1</span>
-                <span>Info - 2</span>
-                <span>Info - 3</span>
-            </p>
-            <p class="team" teamID="2">
-                <i class="icon-right-open selector"></i>
-                <span>Flash Family</span>
-                <span>Info - 1</span>
-                <span>Info - 2</span>
-                <span>Info - 3</span>
-            </p>
-            <p class="team" teamID="3">
-                <i class="icon-right-open selector"></i>
-                <span>Batman & Robin</span>  
-                <span>Info - 1</span>
-                <span>Info - 2</span>
-                <span>Info - 3</span>
-            </p>
-            <p class="team" teamID="4">
-                <i class="icon-right-open selector"></i>
-                <span>Teen Titans</span>
-                <span>Info - 1</span>
-                <span>Info - 2</span>
-                <span>Info - 3</span>
-            </p>
-            <p class="team" teamID="5">
-                <i class="icon-right-open selector"></i>
-                <span>Superman Family</span>
-                <span>Info - 1</span>
-                <span>Info - 2</span>
-                <span>Info - 3</span>
-            </p>
-        </div>
+            <ul>
+            <li>
+                <p class="team" teamID="1">
+                    <i class="icon-right-open selector"></i>
+                    <span>Justice League</span>
+                    <span>Info - 1</span>
+                    <span>Info - 2</span>
+                    <span>Info - 3</span>
+                </p>
+            </li>
+            <li>
+                <p class="team" teamID="2">
+                    <i class="icon-right-open selector"></i>
+                    <span>Flash Family</span>
+                    <span>Info - 1</span>
+                    <span>Info - 2</span>
+                    <span>Info - 3</span>
+                </p>
+            </li>
+            <li>
+                <p class="team" teamID="3">
+                    <i class="icon-right-open selector"></i>
+                    <span>Batman & Robin</span>  
+                    <span>Info - 1</span>
+                    <span>Info - 2</span>
+                    <span>Info - 3</span>
+                </p>
+            </li>
+            <li>
+                <p class="team" teamID="4">
+                    <i class="icon-right-open selector"></i>
+                    <span>Teen Titans</span>
+                    <span>Info - 1</span>
+                    <span>Info - 2</span>
+                    <span>Info - 3</span>
+                </p>
+            </li>
+            <li>
+                <p class="team" teamID="5">
+                    <i class="icon-right-open selector"></i>
+                    <span>Superman Family</span>
+                    <span>Info - 1</span>
+                    <span>Info - 2</span>
+                    <span>Info - 3</span>
+                </p>
+            </li>
+            </ul>
+        </nav>
         <div class="line"></div>
         <div id="heroes">
         </div>

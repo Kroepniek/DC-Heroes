@@ -128,6 +128,65 @@ function RemoveRate(rateID, teamID, heroID)
     xmlhttp.send("id="+heroID+"&team="+teamID+"&rateId="+rateID+"&q=removeRate");
 }
 
+function AddNewHeroPopup()
+{
+    var main = document.getElementById('container');
+
+    //Background
+    var alphaBg = document.createElement("div");
+    alphaBg.id = "alpha-bg";
+    
+    main.appendChild(alphaBg);
+
+    //Popup
+    var popupBg = document.createElement("div");
+    popupBg.id = "popup-bg";
+
+    alphaBg.appendChild(popupBg);
+
+    //Popup labels, inputs
+
+    //Hero Name
+    var label = document.createElement("p");
+    label.classList = "popup-label";
+    var node = document.createTextNode("Set Hero name:");
+    var input = document.createElement("input");
+    input.type = "text";
+    input.name = "hero-name";
+    input.classList = "popup-input";
+    label.appendChild(node);
+
+    popupBg.appendChild(label);
+    popupBg.appendChild(input);
+
+    //Hero Description
+    label = document.createElement("p");
+    label.classList = "popup-label";
+    node = document.createTextNode("Set Hero description:");
+    input = document.createElement("textarea");
+    input.type = "text";
+    input.name = "hero-desc";
+    input.classList = "popup-text";
+    input.rows = 5;
+    label.appendChild(node);
+    
+    popupBg.appendChild(label);
+    popupBg.appendChild(input);
+    
+    //Hero Image
+    label = document.createElement("p");
+    label.classList = "popup-label";
+    node = document.createTextNode("Set Hero picture:");
+    input = document.createElement("input");
+    input.type = "file";
+    input.name = "hero-picture";
+    input.classList = "popup-picture";
+    label.appendChild(node);
+    
+    popupBg.appendChild(label);
+    popupBg.appendChild(input);
+}
+
 window.onload = function()
 {
     teams.forEach(team => {

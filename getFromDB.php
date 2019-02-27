@@ -25,14 +25,14 @@
                     <div class="hero" onclick="RateHero('.$_POST['team'].', '.$row["heroId"].')">
                         <div><img src="img/heroes/'.$row["heroImage"].'" height="230" width="170" /></div>
                         <div>
+                            <icon class="remove-min remove-hero icon-trash-empty" onclick="RemoveHero('.$_POST['team'].', '.$row["heroId"].')"></icon>
                             <span>'.$row["heroName"].'</span>
                             <span>'.$row["heroDescription"].'</span>
                         </div>
-                        <div class="remove-min remove-hero icon-trash-empty" onclick="RemoveHero('.$_POST['team'].', '.$row["heroId"].')"></div>
                     </div>';
                 }
                 echo '
-                    <div class="hero-add" onclick="AddNewHero()">
+                    <div class="hero-add" onclick="AddNewHeroPopup()">
                         <p>+</p>
                     </div>';
             }
@@ -151,7 +151,7 @@
                     </div>
                 <div id="show-hero-comment">
                     <p>Write comment:</p>
-                    <textarea id="RateComment" placeholder="Write comment, minimum 3 letters..."></textarea>
+                    <textarea id="RateComment" placeholder="Write comment, minimum 3 letters..." required></textarea>
                     <div id="SubmitComment" onclick="SubmitRate('.$heroInfo['teamId'].')">Submit</div>
                 </div>';
 
