@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Czas generowania: 27 Lut 2019, 20:43
+-- Czas generowania: 28 Lut 2019, 15:15
 -- Wersja serwera: 5.7.19
 -- Wersja PHP: 7.1.20
 
@@ -67,7 +67,7 @@ INSERT INTO `hero` (`heroId`, `heroName`, `heroDescription`, `heroPower`, `heroI
 (23, 'Supergirl', 'Supergirl is the superhero name of Kara Zor-El, cousin to Superman. She was created by writer Otto Binder and designed by artist Al Plastino in 1959, and she first appeared in Action Comics, in whose first issue Superman himself was introduced.', 'Supergirl possesses Kryptonian standard abilities. She is incredibly strong, fast and nigh invulnerable, and possesses the capability to fly.', 'supergirl.jpg', 5),
 (24, 'Jonathan Samuel Kent', 'Jonathan Kent is the firstborn son of Kryptonian superhero Superman and news reporter Lois Lane.', 'Jon\'s able to absorb the light and radiation of stars & suns, mainly those of the yellow stellar spectrum.', 'jonathan-samuel-kent.jpg', 5),
 (25, 'Catherine Grant', 'Catherine Grant, most commonly known as \"Cat\", is a reporter for the Daily Planet newspaper.', 'She is the gossip columnist, and is very fond of badmouthing Supergirl in her articles.', 'catherine-grant.jpg', 5),
-(28, 'Kroepniek', 'Amazing man, insane skills.', '- Slapen\n- Eten\n- Winnen', 'kon_avatar_teczowy.jpg', 1);
+(29, 'Daniel', 'Smart guy.\nHe deserves a good grade for this project.', '- Slapen\n- Eten\n- Winnen', 'kon_avatar_gay.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -88,12 +88,7 @@ CREATE TABLE `rating` (
 --
 
 INSERT INTO `rating` (`ratingId`, `heroId`, `rating`, `ratingDate`, `ratingReview`) VALUES
-(5, 1, 10, '2019-02-25 13:34:07.00000', 'Kocham cie kurwa'),
-(6, 1, 1, '2019-02-25 13:47:29.00000', 'Kuraz'),
-(7, 3, 10, '2019-02-25 13:47:43.00000', 'Dobry koleka'),
-(10, 4, 1, '2019-02-26 17:55:32.00000', 'Frajer'),
-(11, 27, 10, '2019-02-27 21:26:08.00000', 'Amazing person.'),
-(12, 28, 10, '2019-02-27 21:41:10.00000', 'Ik zou hem een 10 geven voor dit project. Api was niet gebruikt want api zou niet zo goed werken met nieuwe hero toevoegen dus ik heb alleen gebruikt gemaakt van DB. Als er geen CMS was, zou ik wel een API gebruiken.');
+(13, 29, 10, '2019-02-28 15:18:25.00000', 'Ik zou hem een 10 geven voor dit project. Api was niet gebruikt want api zou niet zo goed werken met nieuwe hero toevoegen dus ik heb alleen gebruikt gemaakt van DB. Als er geen CMS was, zou ik wel een API gebruiken.');
 
 -- --------------------------------------------------------
 
@@ -149,13 +144,13 @@ ALTER TABLE `team`
 -- AUTO_INCREMENT dla tabeli `hero`
 --
 ALTER TABLE `hero`
-  MODIFY `heroId` int(3) NOT NULL AUTO_INCREMENT COMMENT 'the unique heroId used as a parameter in the URL and fetched by PHP using the $_GET superblobal variable', AUTO_INCREMENT=29;
+  MODIFY `heroId` int(3) NOT NULL AUTO_INCREMENT COMMENT 'the unique heroId used as a parameter in the URL and fetched by PHP using the $_GET superblobal variable', AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT dla tabeli `rating`
 --
 ALTER TABLE `rating`
-  MODIFY `ratingId` int(3) NOT NULL AUTO_INCREMENT COMMENT 'unique rating is, auto incremented', AUTO_INCREMENT=13;
+  MODIFY `ratingId` int(3) NOT NULL AUTO_INCREMENT COMMENT 'unique rating is, auto incremented', AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT dla tabeli `team`

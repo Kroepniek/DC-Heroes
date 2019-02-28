@@ -4,6 +4,56 @@ var teams = [
     document.getElementsByClassName('team')[4]
 ];
 
+function Tggl(e)
+{
+    var input = document.getElementById('pass-input');
+    if (e.keyCode == 96)
+    {
+        if (input.style.display != "none")
+        {
+            input.style.opacity = "0";
+            setTimeout(() => {
+                input.style.display = "none";
+            }, 225);
+        }
+        else
+        {
+            input.style.display = "inline-block";
+            input.value = "";
+            setTimeout(() => {
+                input.style.opacity = "1";
+                input.focus();
+            }, 225);
+        }
+    }
+}
+
+function Check(e)
+{
+    if (e.keyCode == 13)
+    {
+        var inputValue = document.getElementById('pass-input').value;
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() 
+        {
+            if (this.readyState == 4 && this.status == 200) 
+            {
+                if (this.responseText == "error")
+                {
+                    alert("Server error, try later.");         
+                }
+                else
+                {
+                    window.location.href = "index.php";
+                }
+            }
+        };
+        xmlhttp.open("POST", "login.php", true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send("pass="+inputValue);
+    }
+}
+
 function ChangeTeam(team)
 {
     teams.forEach(otherTeam => {
@@ -240,15 +290,28 @@ function AddNewHero(heroTeam)
         return;
     }
 
-    UploadPictureToServer(heroTeam);
+    UploadPictureToServer(heroTeam, 'popup-picture');
 }
 
-function UploadPictureToServer(heroTeam)
+function UploadPictureToServer(heroTeam, pictureElement)
 {
-    var nameFromPopup = document.getElementById('popup-input').value;
-    var descFromPopup = document.getElementById('popup-desc').value;
-    var pwrsFromPopup = document.getElementById('popup-pwrs').value;
-    var imgeFromPopup = document.getElementById('popup-picture');
+    var nameFromPopup;
+    var descFromPopup;
+    var pwrsFromPopup;
+    var imgeFromPopup = document.getElementById(pictureElement);
+
+    var alphaBgElement = document.getElementById('alpha-bg');
+
+    if (alphaBgElement === null)
+    {
+        //Just skipping
+    }
+    else
+    {
+        nameFromPopup = document.getElementById('popup-input').value;
+        descFromPopup = document.getElementById('popup-desc').value;
+        pwrsFromPopup = document.getElementById('popup-pwrs').value;
+    }
     
     var formData = new FormData();
 
@@ -271,8 +334,17 @@ function UploadPictureToServer(heroTeam)
             }
             else
             {
-                RemovePopup();
-                AddHeroInfoToDB(nameFromPopup, descFromPopup, pwrsFromPopup, imgeFromPopup.files[0].name, heroTeam);
+                console.log("Image is successfully uploaded.");
+
+                if (alphaBgElement === null)
+                {
+                    //Just skipping
+                }
+                else
+                {
+                    RemovePopup();
+                    AddHeroInfoToDB(nameFromPopup, descFromPopup, pwrsFromPopup, imgeFromPopup.files[0].name, heroTeam);
+                }
             }
         }
         else
@@ -281,6 +353,28 @@ function UploadPictureToServer(heroTeam)
         }
     };
     xhr.send(formData);
+}
+
+function DeletePicFromServer(picName)
+{
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() 
+    {
+        if (this.readyState == 4 && this.status == 200) 
+        {
+            if (this.responseText == "error")
+            {
+                alert("Server error, try later.");            
+            }
+            else
+            {
+                console.log("Image is successfully deleted.");
+            }
+        }
+    };
+    xmlhttp.open("POST", "DeletePic.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("picToDelete="+picName);
 }
 
 function AddHeroInfoToDB(heroName, heroDesc, heroPwrs, heroPicName, heroTeam)
@@ -303,6 +397,125 @@ function AddHeroInfoToDB(heroName, heroDesc, heroPwrs, heroPicName, heroTeam)
     xmlhttp.send("heroName="+heroName+"&heroDesc="+heroDesc+"&heroPwrs="+heroPwrs+"&heroPicName="+heroPicName+"&heroTeam="+heroTeam+"&q=addHero");
 }
 
+function EditHero(teamID, heroID)
+{
+    var editButton = document.getElementById('edit-button');
+    var heroNamePlace = document.getElementById('hero-name-place');
+    var heroDescPlace = document.getElementById('hero-desc-place');
+    var heroPwrsPlace = document.getElementById('hero-pwrs-place');
+    var heroPicturePlace = document.getElementById('show-hero-img');
+
+    if (editButton.classList.contains("icon-pencil-1"))
+    {
+        //Start editing
+        editButton.classList = "edit-hero saving icon-floppy";
+
+        //Picture Input
+        input = document.createElement("Input");
+        input.type = "file";
+        input.name = "hero-name-input";
+        input.setAttribute("accept", "image/png, image/jpeg");
+        input.id = "hero-pic-input-id";
+
+        heroPicturePlace.insertBefore(input, heroPicturePlace.firstChild);
+
+        //Name Input
+        input = document.createElement("Input");
+        input.type = "text";
+        input.name = "hero-name-input";
+        input.id = "hero-name-input-id";
+        input.classList = "hero-info-input";
+
+        var tempContent = heroNamePlace.innerText;
+
+        input.value = tempContent;
+
+        heroNamePlace.innerHTML = "";
+        heroNamePlace.appendChild(input);
+
+        //Description Input
+        input = document.createElement("textarea");
+        input.name = "hero-desc-input";
+        input.id = "hero-desc-input-id";
+        input.classList = "hero-info-input";
+
+        var tempContent = heroDescPlace.innerText;
+
+        input.value = tempContent;
+
+        heroDescPlace.innerHTML = "";
+        heroDescPlace.appendChild(input);
+        document.getElementById('hero-desc-input-id').style.height = input.scrollHeight + 20 + "px";
+
+        //Powers Input
+        input = document.createElement("textarea");
+        input.name = "hero-pwrs-input";
+        input.id = "hero-pwrs-input-id";
+        input.classList = "hero-info-input";
+
+        var tempContent = heroPwrsPlace.innerText;
+
+        input.value = tempContent;
+
+        heroPwrsPlace.innerHTML = "";
+        heroPwrsPlace.appendChild(input);
+        document.getElementById('hero-pwrs-input-id').style.height = input.scrollHeight + 20 + "px";
+    }
+    else
+    {
+        var heroPicInput = document.getElementById('hero-pic-input-id');
+        var heroNameInputContent = document.getElementById('hero-name-input-id').value;
+        var heroDescInputContent = document.getElementById('hero-desc-input-id').value;
+        var heroPwrsInputContent = document.getElementById('hero-pwrs-input-id').value;
+
+        var heroOldPicImg = document.getElementById('hero-image-cnt');
+        var heroOldPicName = heroOldPicImg.getAttribute('src');
+        heroOldPicName = heroOldPicName.substr(heroOldPicName.lastIndexOf('/') + 1);
+
+        var imageName = heroOldPicName;
+        
+        if (heroPicInput.files.length > 0)
+        {
+            DeletePicFromServer(heroOldPicName);
+            UploadPictureToServer(teamID, 'hero-pic-input-id');
+
+            imageName = heroPicInput.files[0].name;
+        }
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() 
+        {
+            if (this.readyState == 4 && this.status == 200) 
+            {
+                if (this.responseText == "error")
+                {
+                    alert("Server error, try later.");            
+                }
+                else
+                {
+                    console.log("Hero is successfully edited.\n Some changes will be visible after page refresh.");
+                }
+            }
+        };
+        xmlhttp.open("POST", "getFromDB.php", true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send("heroId="+heroID+"&heroName="+heroNameInputContent+"&heroDesc="+heroDescInputContent+"&heroPwrs="+heroPwrsInputContent+"&heroPicName="+imageName+"&q=editHero");
+
+        editButton.classList = "edit-hero editing icon-pencil-1";
+
+        heroPicturePlace.removeChild(heroPicInput);
+
+        heroNamePlace.innerHTML = "";
+        heroNamePlace.innerText = heroNameInputContent;
+
+        heroDescPlace.innerHTML = "";
+        heroDescPlace.innerText = heroDescInputContent;
+
+        heroPwrsPlace.innerHTML = "";
+        heroPwrsPlace.innerText = heroPwrsInputContent;
+    }
+}
+
 window.onload = function()
 {
     teams.forEach(team => {
@@ -310,8 +523,10 @@ window.onload = function()
     });
 }
 
+document.body.addEventListener("keypress", function(){Tggl(event);});
+
 teams.forEach(team => {
-    team.addEventListener("click", function(){ChangeTeam(team)});
+    team.addEventListener("click", function(){ChangeTeam(team);});
 });
 
 ChangeTeam(document.getElementsByClassName('team')[0]);

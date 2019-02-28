@@ -38,6 +38,23 @@ header img
     left: 20px;
 }
 
+#pass-input
+{
+    opacity: 0;
+    position: relative;
+    top: -60px;
+    left: calc(100% - 300px);
+    padding: 2px;
+    border-radius: 3px;
+    width: 100px;
+    height: 16px;
+    text-align: left;
+    font-size: 20px;
+    line-height: 22px;
+    border: none;
+    transition-duration: 225ms;
+}
+
 #alpha-bg
 {
     z-index: 100;
@@ -280,7 +297,7 @@ header img
     font-weight: bold;
 }
 
-.hero span:nth-child(2)
+.hero span:nth-of-type(1)
 {
     padding: 15px 0px 0px 25px;
     font-size: 24px;
@@ -314,6 +331,11 @@ header img
     overflow-y: scroll;
     overflow-x: hidden;
     transition-duration: 300ms;
+}
+
+.show-hero:hover > .edit-hero
+{
+    filter: grayscale(0%);
 }
 
 .show-hero #show-hero-img
@@ -410,8 +432,7 @@ header img
 {
     margin: 0px 150px 15px 100px;
     width: 500px;
-    height: 260px;
-    overflow: hidden;
+    overflow: auto;
 }
 
 .show-hero #show-hero-comment
@@ -540,4 +561,83 @@ header img
 {
     background-color: #FF3434;
     color: #fff;
+}
+
+.edit-hero
+{
+    position: relative;
+    top: 10px;
+    left: 65px;
+    background-color: #fff;
+    color: #000;
+    text-align: center;
+    line-height: 24px;
+    padding: 0px;
+    height: 24px;
+    width: 24px;
+    font-size: 17px;
+    font-weight: bolder;
+    border-radius: 16px;
+    transition-duration: 150ms;
+    display: inline-block;
+    filter: grayscale(100%);
+}
+
+.edit-hero:hover
+{
+    color: #fff;
+}
+
+.editing
+{
+    border: solid 3px #0282F9;
+}
+
+.editing:hover
+{
+    background-color: #04A4FB;
+}
+
+.saving
+{
+    border: solid 3px #01B540;
+}
+
+.saving:hover
+{
+    background-color: #03D762;
+}
+
+.hero-info-input
+{
+    font-family: inherit;
+    padding: 5px;
+    border-radius: 3px;
+    width: 440px;
+}
+
+#hero-name-input-id
+{
+    font-size: 34px;
+    font-weight: bold;
+    text-align: center;
+    height: 30px;
+}
+
+#hero-desc-input-id
+{
+    resize: vertical;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+    width: 478px;
+}
+
+#hero-pwrs-input-id
+{
+    resize: vertical;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+    width: 478px;
 }

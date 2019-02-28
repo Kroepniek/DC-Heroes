@@ -1,9 +1,8 @@
 <?php
+    session_start();
 
     if (isset($_POST['q']))
     {
-        session_start();
-
         require "connect.php";
 
         if ($con->connect_error) 
@@ -24,17 +23,24 @@
                     echo '
                     <div class="hero" onclick="RateHero('.$_POST['team'].', '.$row["heroId"].')">
                         <div><img src="img/heroes/'.$row["heroImage"].'" height="230" width="170" /></div>
-                        <div>
-                            <icon class="remove-min remove-hero icon-trash-empty" onclick="RemoveHero('.$_POST['team'].', '.$row["heroId"].')"></icon>
+                        <div>';
+                    if (isset($_SESSION['admin']) && $_SESSION['admin'] == "true")
+                    {
+                        echo'<icon class="remove-min remove-hero icon-trash-empty" onclick="RemoveHero('.$_POST['team'].', '.$row["heroId"].')"></icon>';
+                    }
+                    echo '        
                             <span>'.$row["heroName"].'</span>
                             <span>'.$row["heroDescription"].'</span>
                         </div>
                     </div>';
                 }
-                echo '
-                    <div class="hero-add" onclick="AddNewHeroPopup('.$_POST['team'].')">
-                        <p>+</p>
-                    </div>';
+                if (isset($_SESSION['admin']) && $_SESSION['admin'] == "true")
+                {
+                    echo '
+                        <div class="hero-add" onclick="AddNewHeroPopup('.$_POST['team'].')">
+                            <p>+</p>
+                        </div>';
+                }
             }
             else
             {
@@ -97,7 +103,6 @@
             {
                 
                 $return = array($image, $members, $rating);
-                //echo $image.",".$members.",".$rating;
                 echo json_encode($return);
             }
         }
@@ -132,9 +137,17 @@
                 $averageRating = round($averageRating / $ratingCount);
             }
 
-            echo '
-            <div class="show-hero" heroID="'.$heroInfo["heroId"].'">
-                <div id="show-hero-img"><img src="img/heroes/'.$heroInfo["heroImage"].'" height="250" width="250" /></div>
+            echo '<div class="show-hero" heroID="'.$heroInfo["heroId"].'">';
+
+            if (isset($_SESSION['admin']) && $_SESSION['admin'] == "true")
+            {
+                echo '<div class="edit-hero editing icon-pencil-1" id="edit-button" onclick="EditHero('.$_POST["team"].', '.$heroInfo["heroId"].')"></div>';
+            }
+
+            echo '    
+                <div id="show-hero-img">
+                    <img id="hero-image-cnt" src="img/heroes/'.$heroInfo["heroImage"].'" height="250" width="250" />
+                </div>
                 <div id="show-hero-rate" onmouseleave="BackToRightRate()">
                     <i class="icon-'.($averageRating > 0 ? ($averageRating > 1 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star" onmousemove="RateHover(0, 1, 2, false)" onclick="RateHover(0, 1, 2, true)"></i>
                     <i class="icon-'.($averageRating > 2 ? ($averageRating > 3 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star" onmousemove="RateHover(1, 3, 4, false)" onclick="RateHover(1, 3, 4, true)"></i>
@@ -143,10 +156,13 @@
                     <i class="icon-'.($averageRating > 8 ? ($averageRating > 9 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star" onmousemove="RateHover(4, 9, 10, false)" onclick="RateHover(4, 9, 10, true)"></i>
                 </div>
                 <div id="show-hero-info">
-                    <span>'.$heroInfo["heroName"].'</span>
                     <span>
-                        '.$heroInfo["heroDescription"].'<br><br>
-                        '.$heroInfo["heroPower"].'
+                        <div id="hero-name-place">'.$heroInfo["heroName"].'</div>
+                    </span>
+                    <span>
+                        <div id="hero-desc-place">'.$heroInfo["heroDescription"].'</div>
+                        <br><br>
+                        <div id="hero-pwrs-place">'.$heroInfo["heroPower"].'</div>
                     </span>
                     </div>
                 <div id="show-hero-comment">
@@ -165,8 +181,14 @@
                             <i class="icon-'.($comment["rating"] > 2 ? ($comment["rating"] > 3 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star-comment"></i>
                             <i class="icon-'.($comment["rating"] > 4 ? ($comment["rating"] > 5 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star-comment"></i>
                             <i class="icon-'.($comment["rating"] > 6 ? ($comment["rating"] > 7 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star-comment"></i>
-                            <i class="icon-'.($comment["rating"] > 8 ? ($comment["rating"] > 9 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star-comment"></i>
-                            <div class="remove-min remove-rate" onclick="RemoveRate('.$comment["ratingId"].', '.$_POST["team"].', '.$_POST["id"].')"></div>
+                            <i class="icon-'.($comment["rating"] > 8 ? ($comment["rating"] > 9 ? 'star' : 'star-half-alt') : 'star-empty').' rate-star-comment"></i>';
+
+                if (isset($_SESSION['admin']) && $_SESSION['admin'] == "true")
+                {
+                    echo '<div class="remove-min remove-rate" onclick="RemoveRate('.$comment["ratingId"].', '.$_POST["team"].', '.$_POST["id"].')"></div>';
+                }
+
+                echo '
                         </div>
                         <span>'.date_format(date_create($comment["ratingDate"]), "d.m.Y | H:i").'</span>
                         <p>
@@ -206,26 +228,47 @@
         }
         else if ($_POST['q'] == "removeRate")
         {
-            $sql = "DELETE FROM rating WHERE ratingId = ".$_POST['rateId'];
-
-            if ($con->query($sql) === TRUE) {
-                echo "ok";
-            }
-            else 
+            if (isset($_SESSION['admin']) && $_SESSION['admin'] == "true")
             {
-                echo "error";
+                $sql = "DELETE FROM rating WHERE ratingId = ".$_POST['rateId'];
+
+                if ($con->query($sql) === TRUE) {
+                    echo "ok";
+                }
+                else 
+                {
+                    echo "error";
+                }
             }
         }
         else if ($_POST['q'] == "addHero")
         {
-            $sql = "INSERT INTO hero VALUES (NULL, \"".$_POST['heroName']."\", \"".$_POST['heroDesc']."\", \"".$_POST['heroPwrs']."\", \"".$_POST['heroPicName']."\", ".intval($_POST['heroTeam']).")";
-
-            if ($con->query($sql) === TRUE) {
-                echo "ok";
-            }
-            else 
+            if (isset($_SESSION['admin']) && $_SESSION['admin'] == "true")
             {
-                echo "error";
+                $sql = "INSERT INTO hero VALUES (NULL, \"".$_POST['heroName']."\", \"".$_POST['heroDesc']."\", \"".$_POST['heroPwrs']."\", \"".$_POST['heroPicName']."\", ".intval($_POST['heroTeam']).")";
+
+                if ($con->query($sql) === TRUE) {
+                    echo "ok";
+                }
+                else 
+                {
+                    echo "error";
+                }
+            }
+        }
+        else if ($_POST['q'] == "editHero")
+        {
+            if (isset($_SESSION['admin']) && $_SESSION['admin'] == "true")
+            {
+                $sql = "UPDATE hero SET heroName = \"".$_POST['heroName']."\", heroDescription = \"".$_POST['heroDesc']."\", heroPower = \"".$_POST['heroPwrs']."\", heroImage = \"".$_POST['heroPicName']."\" WHERE heroId = ".$_POST['heroId'];
+
+                if ($con->query($sql) === TRUE) {
+                    echo "ok";
+                }
+                else 
+                {
+                    echo "error";
+                }
             }
         }
 

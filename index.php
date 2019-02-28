@@ -22,6 +22,7 @@
 <body>
 	<header>
         <a href="index.php"><img src="img/dc_heroes_logo.png" height="100" width="100"/>Heroes</a>
+        <input id="pass-input" type="password" name="pass" style="display: none;" onkeypress="Check(event)"/>
 	</header>
 	<div id="container">
         <nav id="teams">
@@ -83,7 +84,7 @@
             </div>
         </div>
     </div>
-    <script src="js/choose_team.js"></script>
+    <script src="js/main.js"></script>
     <script src="js/rating.js"></script>
 </body>
 </html>
